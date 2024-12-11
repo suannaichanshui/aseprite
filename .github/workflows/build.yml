@@ -16,19 +16,19 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       with:
-        submodules: &#39;recursive&#39;
+        submodules: 'recursive'
     - name: ccache
       uses: hendrikmuhs/ccache-action@v1
-      if: runner.os == &#39;Linux&#39;
+      if: runner.os == 'Linux'
       with:
         key: ${{ matrix.os }}-${{ matrix.enable_ui }}
     - uses: seanmiddleditch/gha-setup-ninja@master
     - uses: ilammy/msvc-dev-cmd@v1
-      if: runner.os == &#39;Windows&#39;
+      if: runner.os == 'Windows'
     - name: Install Dependencies
       shell: bash
       run: |
-        if [[ &#34;${{ runner.os }}&#34; == &#34;Linux&#34; ]] ; then
+        if [[ "${{ runner.os }}" == "Linux" ]] ; then
           sudo apt-get update -qq
           sudo apt-get install -y \
             libx11-dev libxcursor-dev libxi-dev
@@ -36,7 +36,7 @@ jobs:
     - name: Generating Makefiles
       shell: bash
       run: |
-        if [[ &#34;${{ runner.os }}&#34; == &#34;Windows&#34; ]] ; then
+        if [[ "${{ runner.os }}" == "Windows" ]] ; then
           export enable_ccache=off
         else
           export enable_ccache=on
@@ -54,10 +54,12 @@ jobs:
     - name: Compiling
       shell: bash
       run: |
-        cd build &amp;&amp; ninja
+        cd build && ninja
     - uses: actions/upload-artifact@v3
       with:
         name: aseprite
         path: |
           D:/a/aseprite/aseprite/build/bin/data
           D:/a/aseprite/aseprite/build/bin/aseprite.exe
+————————————————
+                      
